@@ -20,7 +20,8 @@ let make = () => {
     );
 
   <div>
-    <button onClick={_event => dispatch(Toggle)}> {React.string("Toggle")} </button>
+    <button onClick={_ => dispatch(Toggle)}> {React.string("Toggle")} </button>
     {state.show ? React.string("Siema!") : React.null}
+    <button onClick={_ => dispatch(Click)}> {React.string(string_of_int(state.count))} </button>
   </div>;
 };
