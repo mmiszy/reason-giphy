@@ -8,7 +8,7 @@ type action =
   | Toggle;
 
 [@react.component]
-let make = () => {
+let make = (~name: string) => {
   let (state, dispatch) =
     React.useReducer(
       (state, action) =>
@@ -21,7 +21,7 @@ let make = () => {
 
   <div>
     <button onClick={_ => dispatch(Toggle)}> {React.string("Toggle")} </button>
-    {state.show ? React.string("Siema!") : React.null}
+    {state.show ? React.string("Siema, " ++ name ++ "!") : React.null}
     <button onClick={_ => dispatch(Click)}> {React.string(string_of_int(state.count))} </button>
   </div>;
 };
