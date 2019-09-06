@@ -21,5 +21,20 @@ let gifsListReducer = (state, action) => {
 
 [@react.component]
 let make = (~searchTerm: string) => {
-  React.null;
+  let (state, dispatch) = React.useReducer(gifsListReducer, initialState);
+
+  switch (state) {
+  | {error: Some(err)} =>
+    Js.log(err);
+    <div> {React.string("There was an error!")} </div>;
+  | {response: Some(gifs)} =>
+    gifs
+    |> Array.map((gif: GiphyApi.singleGif) =>
+         <li key={gif.url}>
+           <video width={gif.width} height={gif.height} src={gif.mp4} autoPlay=true loop=true />
+         </li>
+       )
+    |> React.array
+  | _ => React.null
+  };
 };
