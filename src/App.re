@@ -8,5 +8,8 @@ let make = () => {
       setState(_ => value);
       ();
     });
-  <div> <input placeholder={j|Search gifs…|j} autoFocus=true value=state onChange /> </div>;
+  <div>
+    <input placeholder={j|Search gifs…|j} autoFocus=true value=state onChange />
+    <GifList searchTerm=state />
+  </div>;
 };
