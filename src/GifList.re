@@ -19,6 +19,22 @@ let gifsListReducer = (state, action) => {
   };
 };
 
+let fetchGifsActionCreator = (dispatch, searchTerm) => {
+  dispatch(FetchStarted);
+  Js.Promise.(
+    GiphyApi.searchGifs(searchTerm)
+    |> then_(gifs => {
+         dispatch(FetchSuccessful(gifs));
+         resolve();
+       })
+    |> catch(err => {
+         dispatch(FetchFailed(err));
+         resolve();
+       })
+  )
+  |> ignore;
+};
+
 [@react.component]
 let make = (~searchTerm: string) => {
   let (state, dispatch) = React.useReducer(gifsListReducer, initialState);
