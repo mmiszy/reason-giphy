@@ -39,6 +39,14 @@ let fetchGifsActionCreator = (dispatch, searchTerm) => {
 let make = (~searchTerm: string) => {
   let (state, dispatch) = React.useReducer(gifsListReducer, initialState);
 
+  React.useEffect1(
+    () => {
+      fetchGifsActionCreator(dispatch, searchTerm);
+      None;
+    },
+    [|searchTerm|],
+  );
+
   switch (state) {
   | {error: Some(err)} =>
     Js.log(err);
